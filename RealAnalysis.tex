@@ -1,0 +1,389 @@
+\documentclass[12pt]{scrbook}
+\usepackage[charter]{mathdesign}
+\usepackage{amsmath}
+\usepackage{appendix}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+
+
+\newtheorem*{definition}{Definition}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\begin{document}
+
+\title{Real and Complex Analysis}
+\author{Dr Ahmed Riza}
+\date{}
+\maketitle
+
+\tableofcontents
+
+\chapter{Real Numbers}
+
+\section{Bounded Sets of Numbers}
+
+\begin{definition}
+The Greatest and Least members of a Set: If S is a set consisting of finitely many different real numbers, plainly there is one member of the set which is greater than all the others and one member which is less than all the others.  Convenient abbreviations for these greatest and least numbers are MAX and MIN.
+\end{definition}
+
+If now S is a set with infinitely many members, there may or may not be a member of S which is greater than all the others (or one which is less than all the others).
+
+\begin{definition}
+Let S be a set of real numbers.  If there is a number K such that, for every member $x$ of $S$, $ x \leq K$, we say that $S$ is bounded above. K is called an {\em upper bound} of S.  Similarly, if there is a K such that $x \ge K$ for every $x \in S$, then S is said to be bounded below, and K is a {\em lower bound} of S.
+
+If S is bounded both above and below, we say simply that it is {\em bounded}. A set which is not bounded is called {\em unbounded}.
+\end{definition}
+
+\begin{theorem} % 1.8 Burkhill
+\label{theorem-1.8}
+If S is a (non-empt) set of numbers which is bounded above, then of all the upper bounds, there is a least one.
+\end{theorem}
+
+\begin{proof}
+Divide the real numbers x into two classes L, R by these rules:
+
+Put x in L if there is a member s of S such that $s > x$.
+
+Put x in R if, whatever member s of S is taken, $s \leq x$.
+
+Then every x goes either into L or into R.  Moreover, neither L nor R is empty.  For, if s is some member of S, then (say) $ x = s - 1 $ is in L.
+
+And, since S is bounded above, any upper bound K, for which $s \leq K$ for all s, is in R. 
+
+Any l of L is less than any r of R.  For there is some s which is greater than l, and this s is less than or equal to r.
+
+By Dedekind's axiom, there is a dividing number $\xi$ such that, for every positive $\epsilon$, $\xi - \epsilon$ is in L and $\xi + \epsilon$ is in R.  In the Dedekind axiom, $\xi$ itself may belong either to L or to R.  We shall prove that, in the present application, $\xi$ belongs to R.
+
+Suppose, if possible, that $\xi$ belongs to L.  Then there is a member s of S which $s > \xi$.
+
+The number $\eta = \frac{1}{2}(s + \xi)$ satisfies $ s > \eta > \xi$: $\eta$ is in R since it is greater than the dividing number $\xi$. So $s \leq \eta$ by the rule for R.  This contradicts our earlier inequality $s > \eta$. So $\xi$ belongs to R.  We have proved that $\xi$ satisfies
+\begin{enumerate}
+	\item $s \leq \xi$ for every s in S
+	\item $\xi - \epsilon$ being any number less than $\xi$, tree is an s for which $s > \xi - \epsilon$.
+\end{enumerate}
+The property (1) shows that $\xi$ is an upper bound of S, and (2) that it is the least upper bound.  
+\end{proof}
+
+\begin{definition}
+\label{def-supremum}
+If, given a set of numbers S, there is a number K such that
+\begin{enumerate}
+	\item $s \leq K$ for every s in S
+	\item for every positive $\epsilon$, there is an s in S for which $s > K - \epsilon$, then we write $K = \sup S$.
+\end{enumerate}
+\end{definition}
+
+Theorem~\ref{theorem-1.8} proved the existence of K when the set S is bounded above. 
+
+By reversing inequality signs, we set up an analogous theory of lower bounds and the greatest of the lower bounds (the {\em infinimum}, abbreviated $\inf$). 
+
+\begin{definition}
+\label{def-infinimum}
+If, given a set of numbers S, there is a number k such that 
+\begin{enumerate}
+	\item $s \ge k$ for every s in S
+	\item for every positive $\epsilon$, there is an s in S for which $s < k + \epsilon$, then we write $k = \inf S$.
+\end{enumerate}
+\end{definition}
+
+A set which is bounded below can be proved to have an infinimum.
+
+\subsection{Examples}
+
+\begin{enumerate}
+	\item Let S be the rational numbers x for which $0 \leq x \leq \frac{1}{2}$. Then $\frac{1}{2}$ is the least upper bound.  It is also the greatest member of S.
+	
+	\item Let S be the rational numbers x for which $x^2 < 2$.  The number $\sqrt{2}$ is the least upper bound.
+	
+	\item Let S denote the set of all rational numbers r satisfying $r \leq 3$.  Show that 3 is the $\sup(S)$.  In this case, $3 \in S$, so S includes its least upper bound. 
+	
+	From the given inequality $r \leq 3$, so that part (1) of Definition~\ref{def-supremum} is satisfied.  Now whatever the value of $\beta >0$, $3 > l - \beta$ and $3 \in S$ so that part (2) of the definition is satisfied.  Hence 3 is the l.u.b for S.
+	
+	\item Let S denote the set of rational numbers satisfying $x < 6$.  Then S has no largest member.
+	
+	The number 6 is not the largest member of S because it does not belong to S, and indeed no number greater than 6 belongs to S. On the other hand if $l$ is a member of S which is less than 6 then the number $(l + 6)/2$ is a rational number which is greater than $l$, and less than 6, so that it is a member of S.  So $l$ could not be the largest member of S. This demonstrates that S has no largest member.
+	
+	\item Let S denote the set of all rational numbers whose squares are less than 2.  Then S is a bounded set but it has no largest member.
+	
+	If $x \ge 2$ then $x^2 \ge 4 > 2$, and so $x \notin S$.  Hence, the number 2 is an upper bound for S.  It is clearly not the least upper bound, as a similar argument demonstrates that 3/2, for example, is also an upper bound for S.  Similarly, -2 is a lower bound for S, so that S is a bounded set.  Suppose that $l$ were the largest member of S.  We cannot have $l^2 = 2$, for there is no such rational number, as we have shown.  We cannot have $l^2 > 2$ for then $l \notin S$.  We shall show that $l^2 < 2$ is also impossible.
+	
+	If $l^2 < 2$ we shall show that we can find a larger number $l + \alpha, (\alpha > 0)$ whose square is also less than 2, as follows:
+	
+	\begin{eqnarray*}
+	(l + \alpha)^2 	&=& l^2 + 2 l \alpha  + \alpha^2 \\
+				&<& l^2 + 4 \alpha + \alpha^2 \;\;\; \text{since} \; l < 2 \\
+				&<&  l^2 + 5 \alpha \;\;\; \text{provided} \; \alpha < l \\
+				&<&  2 \;\;\;  \text{provided} \; \alpha < (2 - l^2)/5
+	\end{eqnarray*}
+	
+	
+	\item Let A and B be sets of numbers which are bounded above, with l.u.b $a$ and $b$ respectively.  Let C denote the set of all numbers of the form $x + y$, where $x \in A$ and $y \in B$.  Show that the l.u.b of C is $a + b$.
+	
+	For all $x \in A$ and $y \in B$, $x \leq a$ and $y \leq b$, using part (1) of the definition of l.u.b.  Hence, $x + y \leq a + b$, and so $a + b$ is an upper bound for C.  We now apply part (2) of the definition of l.u.b to A and to B, with $\beta$ replaced by $\beta/2$.  So for any positive number $\beta$, there are numbers $x \in A$ and $y \in B$ satisfying $x > a - \beta/2$ and $y > b - \beta/2$.  Thus, $ x + y > a + b - \beta $ and so we have shown that there is a number in C exceeding $ a + b - \beta $.  So part (2) of the definition is satisfied, showing that $a + b$ is the l.u.b for C.
+	
+\end{enumerate}
+
+\section{Axiom of Completeness for the Real Number System}
+
+\begin{definition}
+	This states that every non-empty set of real numbers which is bounded above must have a least upper bound in the set of real numbers.  See Theorem~\ref{theorem-1.8} for proof.
+\end{definition}
+
+\begin{proposition}
+\label{prop-sqrt-two}
+There is a real number satisfying the equation $x^2 = 2$.
+\end{proposition}
+
+\begin{proof}
+We consider the set of all rational numbers $r$ satisfying $r^2 < 2$.  We know that this set is bounded above, and the axiom of completeness says that S must have a least upper bound $l$.  We shall show that $l^2 = 2$ by demonstrating that $l^2 < 2$ and $l^2 > 2$ are both impossible.
+
+In a previous example, we showed that if $l^2 < 2$, then we can find a larger number $l + \alpha$ whose square is also less than 2, implying that $l$ could not be an upper bound for S.  Now suppose that $l^2 > 2$.  We shall show that there is a number of the form $l - \beta$ where $\beta > 0$ whose square is also greater than 2.  This will mean that  $l - \beta$ is also an upper bound, so that $l$ could not be the {\em least} upper bound. Now
+
+	\begin{eqnarray*}
+	(l  - \beta)^2 	&=& l^2 - 2 l \beta - \beta^2 \\
+				&>& l^2 - 4 \beta \;\;\; (\text{since} \; \beta^2 > 0 \; \text{and} \; l < 2) \\
+				&>&  2 \;\;\;  \text{provided} \; \beta < (l^2 - 2)/4
+	\end{eqnarray*}
+	
+So we have shown that there is a real number whose square is 2, finally legitimising the use of the symbol $\sqrt{2}$ for the number $l$ defined above.
+\end{proof}
+
+\begin{proposition}
+There is a unique positive real number satisfying the equation $x^2 = 2$.
+\end{proposition}
+
+\begin{proof}
+Existence was established in Proposition~\ref{prop-sqrt-two}.  Here we are demonstrating uniqueness.  The proof uses the method of contradiction.  Suppose that $x_1$ and $x_2$ are both positive numbers satisfying $x^2 = 2$.  Then $x_1^2 = x_2^2$, and so $x_1^2 - x_2^2 = 0$.  Factorizing this gives $(x_1 + x_2)(x_1 - x_2) = 0$.  We must therefore have $(x_1 + x_2) = 0$ or $(x_1 - x_2) = 0$. Since $x_1$ and $x_2$ are both positive we cannot have $(x_1 + x_2) = 0$.  Hence $(x_1 - x_2) = 0$ and so $x_1 = x_2$, proving uniqueness.
+\end{proof}
+
+\begin{proposition}
+Given any two positive real numbers $a$ and $b$, there is a positive integer $n$ satisfying $na \geq b$.  This is known as the {\bf Archimedean Property}.
+\end{proposition}
+
+\begin{proof}
+As on so many occasions, the proof employs the method of contradiction.  So we suppose that the result is false, i.e. that there are two real numbers $a$ and $b$ such that for every positive integer $n, na < b$. This means that the set S of numbers of the form $na$ is bounded above by $b$.  S therefore has a least upper bound $l$.  Now, $l - a < l$ and so there is a number of the set S between $l - a$ and $l$, i.e. there is a positive integer $n_0$ satisfying $l - a < n_0 a < l$.  Adding $a$ to each side of the left-hand inequality gives $l < (n_0 + 1)a$, giving a number of S greater than $l$.  This is a contradiction.
+\end{proof}
+
+\begin{proposition}
+Between any two real numbers there are both rational and irrational numbers.
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Continuous Functions}
+
+\[ f : D \rightarrow \mathbb{R} \;\;\; (\text{or} \; \mathbb{C}) \] 
+where $D \subseteq \mathbb{R} $,  $x \in D, x \rightarrow f(x) \in \mathbb{R} $.
+The set D is called the domain of the function.
+
+\subsection{Examples of Functions}
+
+\begin{enumerate}
+	\item
+	 $ f : \mathbb{R} \rightarrow \mathbb{R} \;\;\; f(x) = x^2 $.
+
+	\item 
+	$f : (0, 1)  \rightarrow \mathbb{R} \;\;\; f(x) = \frac{1}{x(x-1)} $
+
+	\item 
+	$f : \mathbb{R} \ \{0,1\} \rightarrow \mathbb{R} \;\;\; f(x) = \frac{1}{x(x-1)} $
+	
+	\item 
+	$f : \mathbb{R} \rightarrow \mathbb{R} $
+	
+	\[ 
+	f(x) = \left\{ \begin{array}{ll}
+         x^2 & \mbox{if $x \neq 0$} \\
+        1 & \mbox{if $x = 0$}
+         \end{array} 
+         \right. 
+         \] 
+         
+         \item
+         $f : \mathbb{R} \rightarrow \mathbb{R} $
+         
+         	\[ 
+	f(x) = \left\{ \begin{array}{ll}
+         1 & \mbox{if $x \in \mathbb{Q} $} \\
+         0 & \mbox{if $x \notin \mathbb{Q} $}
+         \end{array} 
+         \right. 
+         \] 
+	
+	\item
+         $f : (0, \infty) \rightarrow \mathbb{R} $
+         
+         \[ x \in \mathbb{Q} \;\;\; x = \frac{p}{q} \;\;\; p, q \in \mathbb{Z} \;\;\; \gcd(p, q) = 1 \] 
+         
+         	\[ 
+	f(x) = \left\{ \begin{array}{ll}
+         \frac{1}{q} & \mbox{if $x \in \mathbb{Q} $} \\
+         0 & \mbox{if $x \notin \mathbb{Q} $}
+         \end{array} 
+         \right. 
+         \] 
+
+\end{enumerate}
+
+(3) is different from (2) since domain is different. Graph of f:
+
+\[ \left\{ (x, f(x)) : x \in D \right\}  =  \left\{ (x, y) \in \mathbb{R}^2 :  x \in D, y = f(x) \right\} \]
+
+We cannot really draw the graphs of (5) and (6), since rational points are dense.
+
+\begin{definition}
+
+Take a function f defined as:
+
+\[ f : D \rightarrow \mathbb{R} \;\;\; D \subseteq \mathbb{R} \ ;\;\; a \in D \]
+
+Then 
+$\lim_{x \to a} f(x) = l \in \mathbb{R}$, if for any $\epsilon > 0$  there exists a $\delta > 0$ such that for any $x \in D$ with
+$0 < |x - a| < \delta$ we have that $| f(x) - l | < \epsilon $.
+We can also write this as:
+
+\[ \lim_{x \to a} f(x) = l \iff \forall \epsilon > 0,  \exists \delta > 0: \forall x \in D, 0 < | x - a | < \delta \Rightarrow | f(x) - l | < \epsilon \]
+
+Or, in other words, give them an $\epsilon > 0$, and they'll give a $\delta$, such that, $0 < |x - a| < \delta$, then $| f(x) - l | < \epsilon $.
+\end{definition}
+
+\subsection{Example}
+
+Prove $\lim_{x \to 0} x^2 = 0$.
+
+\hspace{5cm}
+
+\begin{tikzpicture}
+\begin{axis} [
+    xmin=-4, xmax=5,
+    ymin=-4, ymax=5,
+    axis lines=center,
+    axis on top=true,
+    domain=-5:5,
+    ]
+    \addplot [mark=none,draw=red] {x*x};    
+\end{axis} 
+\end{tikzpicture}
+
+\begin{proof}
+
+Here $l = 0$.  Take $\epsilon > 0$, we want $ \left | x^2 - 0 \right | < \epsilon = \left | x^2 \right | = x^2 < \epsilon$.
+
+\begin{eqnarray*}
+x^2 < \epsilon &\Leftrightarrow&  -\sqrt{\epsilon} < x < \sqrt{\epsilon} \\
+&\Leftrightarrow& |x| < \sqrt{\epsilon} 
+\end{eqnarray*}
+
+So, $\forall \epsilon > 0$, $\exists \delta$ (namely, $\delta = \sqrt{\epsilon}$), such that $|x| = |x - 0| < \delta \Leftrightarrow |x^2| = |x^2 - 0| < \epsilon$. So, $\lim_{x \to 0} x^2 = 0$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Example}
+
+Prove $\lim_{x \to 1} x^2 = 1$.
+
+\hspace{5cm}
+
+\begin{tikzpicture}
+\begin{axis} [
+    xmin=-4, xmax=5,
+    ymin=-4, ymax=5,
+    axis lines=center,
+    axis on top=true,
+    domain=-5:5,
+    ]
+    \addplot [mark=none,draw=red] {x*x};    
+    \addplot [mark=none,draw=blue] coordinates { (1,0) (1,4) };
+    \addplot [mark=none,draw=blue] {1};    
+\end{axis} 
+\end{tikzpicture}
+
+\begin{proof}
+This proof is a bit more difficult than the previous one.  We have to prove:
+
+\[ \forall \epsilon > 0,  \exists \delta > 0: 0 < | x - 1 | < \delta \Leftrightarrow | x^2 - 1 | < \epsilon \]
+We want $ | x^2 - 1| $ small.  $x^2 - 1 = (x-1)(x+1)$.
+
+\[ | x^2 - 1 | = | x - 1 | | x + 1 | \leq | x - 1 | ( 1 + |x| ) \]
+
+since, using the triangle inequality, we can write:
+
+\[ | x + 1 | \leq | x | + 1 \]
+
+Now observe that if $ | x - 1 |  < 1 \Rightarrow | x | < 2$, since 
+
+\[ | x | = | x - 1 + 1 | \]
+This follows from the triangle inequality:
+\[ | x - 1 + 1 |  \leq | x - 1 | + |1| = |x - 1| + 1 < 2 \]
+
+
+
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Example}
+
+Prove $\lim_{x \to 1} \frac{3x(x-1)}{(x-1)} = 3$.
+Or in other words, 
+prove: Given $\epsilon > 0$, I can give a $\delta > 0$ as long as $ 0 < | x - 1 | < \delta $, then 
+$ \left | \frac{3x(x-1)}{(x-1)} - 3 \right | < \epsilon $.
+
+\begin{proof}
+We start where we want to get to:
+
+\[ \left | \frac{3x(x-1)}{(x-1)} - 3 \right | < \epsilon \]
+
+As long as $x \ne 1$ (which is OK since we only consider the case of x approaching 1), we can cancel out $(x - 1)$:
+
+\begin{eqnarray*}
+&\Leftrightarrow&  \left | 3x - 3 \right |  < \epsilon \\
+&\Leftrightarrow& \left | 3 (x - 1) \right |  < \epsilon \\
+&\Leftrightarrow& \left | 3 \right | \left | x - 1 \right | < \epsilon \\
+&\Leftrightarrow& 3 \left | x - 1 \right | < \epsilon \\
+&\Leftrightarrow& \left | x - 1 \right | < \frac{\epsilon}{3} 
+\end{eqnarray*}
+
+So, we can use $\frac{\epsilon}{3}$ as our $\delta$.  For example, if you give me an $\epsilon = 1$, then what this means is that
+
+\[ \left | \frac{3x(x-1)}{(x-1)} - 3 \right | < 1 \Leftrightarrow \left | x-1\right | < \frac{1}{3} \]
+
+i.e. as long as $x$ is within $\frac{1}{3}$ of 1, then distance between the function and 3 will be less than 1.
+
+\end{proof}
+
+\begin{tikzpicture}
+\begin{axis} [
+    xmin=-4, xmax=5,
+    ymin=-4, ymax=5,
+    axis lines=center,
+    axis on top=true,
+    domain=-5:5,
+    ]
+
+    \addplot [mark=none,draw=red,ultra thick] {3*x};    
+    \addplot [mark=none,draw=blue] {3};   
+    \addplot [mark=none,draw=blue]  coordinates { (1,0) (1,3) };
+    
+    \addplot [mark=none,draw=green] coordinates { (2/3,0) (2/3,2) };
+    \addplot [mark=none,draw=green] coordinates { (4/3,0) (4/3,4) };
+    
+    \addplot [mark=none,draw=brown] coordinates { (0,2) (3,2) };
+    \addplot [mark=none,draw=brown] coordinates { (0,4) (3,4) };
+\end{axis} 
+\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\chapter{Complex Numbers}
+
+\end{document}
