@@ -1,4 +1,4 @@
-\documentclass[12pt]{scrbook}
+\message{ !name(RealAnalysis.tex)}\documentclass[12pt]{scrbook}
 \usepackage[charter]{mathdesign}
 \usepackage{amsmath}
 \usepackage{appendix}
@@ -13,6 +13,9 @@
 \newtheorem{corollary}{Corollary}[section]
 
 \begin{document}
+
+\message{ !name(RealAnalysis.tex) !offset(-3) }
+
 
 \title{Real and Complex Analysis}
 \author{Dr Ahmed Riza}
@@ -177,104 +180,7 @@ Between any two real numbers there are both rational and irrational numbers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Absolute Value and Complex Numbers}
-
-\section{Absolute Value}
-
-\[ |x| = \text{max}(x, -x) \]
-Equivalently:
-\[ |x| = \sqrt{x^2} \]
-$|x - y|$ is the distance between $x$ and $y$. Example, if $x = -5$ and $y = 4$, then 
-\[ |x-y| = |-5-4| = |-9| = 9 \]
-
-\subsection{Example}
-Fix $x_0 \in \mathbb{R} \;\;\; \epsilon > 0$.
-\[ \{ x \in \mathbb{R} : |x - x_0| < \epsilon \} \]
-
-Algebraically:
-\[ |x - x_0| < \epsilon \Leftrightarrow \text{max}(x - x_0, x_0 - x) < \epsilon \]
-
-There are two cases:
-
-\[ x - x_0 > 0 \Rightarrow \text{max}(x - x_0, x_0 - x) = x - x_0 < \epsilon \]
-
-\[ x < x_0 \Rightarrow \text{max}(x - x_0, x_0 - x) = x_0 - x < \epsilon \]
-
-\[ \Rightarrow x_0 - \epsilon < x < x_0 + \epsilon \]
-
-\section{Complex Numbers}
-
-Let $z = x + iy \;\;\; x, y \in \mathbb{R} $. $ |z| $ is the distance of $z$ to the origin and equals
-\[ \sqrt{x^2 + y^2} \]
-
-$|z - w|$ is the distance of $z$ to $w$.
-
-\section{Triangle Inequality}
-
-\[ |z - w| \le |z| + |w| \]
-Equivalent to 
-\[ |z + w| \le |z| + |w| \]
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\chapter{Sequences}
-
-A sequence is a countable set of real or complex numbers written down in some order.
-
-\[ \frac{1}{2}, \frac{1}{4}, \ldots , \frac{1}{2^n}  \]
-
-\[ 1, -1, 1, -1, \ldots , (-1)^{n-1} \]
-
-\[ 3, 9, 27, \ldots , 3^n \]
-
-\begin{definition}
-A real or complex sequence is a mapping
-\[ S : \mathbb{N} \rightarrow \mathbb{R} \;\;\; \text{or} \;\;\; \mathbb{C} \]
-\end{definition}
-
-$S_n$ is the $n^{th}$ term of the sequence, also used to denote the sequence itself. For example, $S_n = \frac{1}{n}$ designates the sequence
-\[ 1, \frac{1}{2}, \frac{1}{3},  \frac{1}{4}, \ldots , \frac{1}{n} \]
-
-Lets take $S_n = \frac{1}{n^2}$.  As $n$ increases the $n^{th}$ term tends to 0.  However, $S_n = (-1)^{n-1}$ does not tend to a single number as $n$ increases. $S_n  = 3^n$ runs away as $n$ increases and goes to infinity.
-
-\section{Null Sequences}
-
-\begin{definition}
-A sequence is called a null sequence if for any $\epsilon > 0$, there exists an index $N \in \mathbb{N}$ (depending on $\epsilon$), such that for all $n > N$, we have $|S_n| < \epsilon$.
-\end{definition}
-
-\subsection{Example}
-$S_n = \frac{1}{2^n}$ is a null sequence.  Let $\epsilon > 0$ be arbitrary, and take $N$ equal to some natural number such that $2^N > \frac{1}{\epsilon} \Leftrightarrow N > \log(1/\epsilon)$.
-
-Then if $n \ge N \Rightarrow 2^n > 2^N > 1/\epsilon \Rightarrow \frac{1}{2^n} < \epsilon$.  But 
-$\frac{1}{2^n} = |\frac{1}{2^n}| = S_n$.  So, for all $n > N$, $|S_n| < \epsilon$.  For example, take $\epsilon = \frac{1}{2^1000}$.
-We can choose $N = 1001$ or $N = 2000$ etc.
-
-Same argument shows that
-\[ S_n = \frac{(-1)^n}{2^n} \]
-is a null sequence, since
-\[ S_n = \left| \frac{(-1)^n}{2^n} \right| = \frac{1}{2^n} \]
-
-\subsection{Example}
-
-\[
-S_n = 
-  \begin{cases}
-    0 & \text{if n is odd} \\
-    1 & \text{if n is even}
-  \end{cases}
-\]
-is not a null sequence.
-\begin{proof}
-Suppose it were a null sequence.  Then applythe definition, with $\epsilon = \frac{1}{2}$.  Then there should exist an $N$ such that if $n > N$, then $|S_n| < \frac{1}{2}$.  But this gives a contradiction, if we take an $n > N$, which is even (e.g. $n = 2N$).  
-Then $|S_n| = 1 > \frac{1}{2}$.  Hence it is not a null sequence.
-\end{proof}
-
-\section{Sequences Having a Limit (Converging Sequences)}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\chapter{Infinite Series}
+\chapter{Series}
 
 \section{Examples}
 
@@ -297,171 +203,14 @@ In this case, we call this limit, s, the sum of the series, and we write:
 \[  \sum_{k=1}^{\infty} u_k = s \]
 \end{definition}
 
-\subsection{Example}
-Is the series $\sum_{k=0}^{\infty} \frac{1}{2^k} $
+Example: Is the series $\sum_{k=0}^{\infty} \frac{1}{2^k} $
 convergent?
 
 \[ s_n = \sum_{k=0}^{\infty} \frac{1}{2^k} = 1 + \frac{1}{2} + \ldots
 + \frac{1}{2^n}  \]
 
-Note that the geometric series converges to:
 
-\[ 1 + r + r^2 + \ldots + r^n = \frac{1 - r^{n+1}}{1 - r} \;\;\; r
-\neq 1 \]
-
-We can derive this by noting that:
-\begin{eqnarray*}
-S_n           &=& 1 + r + \ldots + r^n \\
-rS_n          &=& r + r^2 + \ldots + r^n  + r^{n+1} \\
-S_n - rS_n &=& 1 - r^{n+1} \\
-S_n(1-r)    &=& 1-r^{n+1} \\
-S_n           &= \frac{1 - r^{n+1}}{1 - r} 
-\end{eqnarray*}
-
-So, $ 1 + \frac{1}{2} + \ldots + \frac{1}{2^n} = \frac{1 -
-  (1/2)^{n+1}}{1 - (1/2)} = \frac{1 - 1/2^{n+1}}{1-(1/2)} $.  
-
-Now,
-$\frac{1}{2^{n+1}} \rightarrow 0$ as $n \rightarrow \infty$.  So $
-\frac{1 - 1/2^{n+1}}{1-(1/2)} \rightarrow \frac{1}{1-(1/2)} = 2$.
-
-Conclusion: $\sum_{k=0}^{\infty} \frac{1}{2^k}  = 2$.
-
-\subsection{Example}
-Is the series $\sum_{k=0}^{\infty} {2^k} $ convergent?
-
-\[ S_n = \sum_{k=0}^{n} {2^k} = \frac{1-2^{n+1}}{1-2} = 2^{n+1} -1 \]
-
-\[ \lim_{n \to \infty} 2^{n+1} - 1 \rightarrow \infty \]
-
-Therefore, $\sum_{k=0}^{\infty} {2^k} $ diverges (does not converge).
-
-\subsection{Example}
-Is the series $\sum_{k=0}^{\infty} (-1)^k $ convergent?
-
-\[S_0 = 1 \]
-\[S_1 = 1 - 1 = 0 \]
-\[S_2 = 1 - 1 + 1 = 1 \]
-\[S_3 = 1 - 1 + 1 -1 = 0 \]
-
-The sequence of partial sums, $S_n$ does not have a limit, therefore,
-the series diverges.
-
-\section{Application}
-
-\[ \sum_{n=1}^{\infty} \frac{1}{n^s} = 1 + \frac{1}{2^s} +\frac{1}{3^s} + \ldots + \frac{1}{n^s} + \ldots \]
-
-\begin{theorem}
-$ \sum_{n=1}^{\infty} \frac{1}{n^s} $ converge if $s > 1$ and diverges
-if $ s \leq 1 $.
-\end{theorem}
-
-In particular, the series for $s = 1$ (harmonic series):
-\[ 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \ldots + \frac{1}{n} + \ldots \]
-diverges.
-
-\begin{proof}
-
-We divide the proof into three separate cases.
-\begin{enumerate}
-\item Case when $s = 1$ :
-
-\[ 1 + \frac{1}{2} + \frac{1}{3} +\frac{1}{4} + \frac{1}{5} +
-\frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \frac{1}{9} + \ldots \]
-
-The idea we use is this:
-
-\[ \frac{1}{3} +  \frac{1}{4}  > 2\left( \frac{1}{4} \right)  = \frac{1}{2}  \]
-
-\[ \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} > 4\left( \frac{1}{8} \right)  = \frac{1}{2}  \]
-
-\[ \frac{1}{9} + \frac{1}{10} + \frac{1}{11}+ \frac{1}{12} +
-\frac{1}{13} + \frac{1}{14} + \frac{1}{15} + \frac{1}{16 }> 8\left( \frac{1}{16} \right)  =
-\frac{1}{2}  \]
-
-Hence
-\begin{eqnarray*}
-&1& + \frac{1}{2} + \frac{1}{3} +\frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \frac{1}{9} + \ldots \\
-> &1& + \frac{1}{2} +  \frac{1}{2} + \frac{1}{2} + \frac{1}{2} + \ldots \rightarrow \infty 
-\end{eqnarray*}
-
-More formally, we group together the $\frac{1}{n}$ terms with $n$ between $2^{l} + 1$ and $2^{l+1}$.
-
-\[ \sum_{n=1}^{\infty} \frac{1}{n} = 1 + \sum_{l=0}^{\infty} \left( \sum_{n=2^{l} + 1}^{2^{l+1}} \frac{1}{n} \right) \]
-
-We can check that this works, by expanding the summation on the right hand side:
-
-\[ l = 0: \;\;\;  \sum_{n=2}^{2} \frac{1}{n}  = \frac{1}{2} \]
-
-\[ l = 1: \;\;\; \sum_{n=3}^{4} \frac{1}{n}  =\frac{1}{3} + \frac{1}{4} \]
-
-\[ l = 2: \;\;\; \sum_{n=5}^{8} \frac{1}{n}  =\frac{1}{5} +\frac{1}{6} +  \frac{1}{7} + \frac{1}{8} \]
-
-\[ l = 3: \;\;\; \sum_{n=9}^{16} \frac{1}{n}  =\frac{1}{9} +\frac{1}{10} +  \frac{1}{11} + \frac{1}{12} 
-+ \frac{1}{13} + \frac{1}{14} + \frac{1}{15} + \frac{1}{16}  \]
-
-Let's look at the partial sums:
-
-\[ S_{2^{k+1}} = \sum_{n=1}^{2^{k+1}} \frac{1}{n}  = 1 + \sum_{l=0}^{k}\left( \sum_{n=2^l + 1}^{2^{l+1}} \frac{1}{n}  \right) \]
-
-Let's check that the right hand side works:
-
-\[ l = k: \;\;\; \sum_{n=2^k + 1}^{2^{k+1}} \frac{1}{n}  \]
-
-So, now, each of the groups inside the right hand side bracketed summation is $\ge$ (number of terms) $\times$ (smallest term), i.e. 
-
-\[ \ge 2^l \times \frac{1}{2^{l+1}}  = \frac{1}{2} \]
-
-Hence
-
-\[ S_{2^{k+1}} \ge 1 + \sum_{l=0}^{k} \frac{1}{2}  = 1 + \frac{k+1}{2} \]
-
-\[ S_{2^{k+1}} \ge 1 + \frac{k+1}{2} \rightarrow \infty \;\;\; \text{as} \;\;\; k \rightarrow \infty \]
-So, the sequence of partial sums do not have a finite limit, hence $\sum \frac{1}{n} $ diverges.
-
-\item Case when $s \le 1$ :
-
-\[ n^s \le n \Rightarrow \frac{1}{n^s} \ge \frac{1}{n} \]
-
-So, partial sums
-
-\[\sum_{n=1}^{k} \frac{1}{n^s} \ge \sum_{n=1}^{k} \frac{1}{n} \rightarrow \infty \;\;\; \text{as} \;\;\; k \rightarrow \infty \]
-
-Hence, $\sum \frac{1}{n^s}$ diverges.
-
-\item Case when $s > 1$ :
-
-\[ \sum_{n=1}^{\infty} \frac{1}{n^s} = 1 + \sum_{l=0}^{\infty} \left( \sum_{n=2^{l} + 1}^{2^{l+1}} \frac{1}{n^s} \right) \]
-
-All the terms are greater than or equal to 0.  Hence the sequence of partial sums
-\[ S_k = \sum_{n=1}^{k} \frac{1}{n^s} \] 
-is increasing. To show convergence, it is sufficient to show that the partial sums stay bounded.  To show that the sequence of partial sums stay bounded, it suffices to show that $ S_{2^k} $ stays bounded  ($ S_k \le S_{2^k} $).
-
-\[ S_{2^k} = \sum_{n=1}^{2^k} \frac{1}{n^s}  = 1 + \sum_{l=0}^{k-1} \left( \sum_{n=2^{l} + 1}^{2^{l+1}} \frac{1}{n^s} \right) \]
-
-Now the right hand bracketed summation terms are $ \le $ (number of terms) $\times$ (biggest term):
-
-\[ \le 2^l \frac{1}{(2^l + 1)^s} \]
-
-\[ S_{2^k} \le 1 +\sum_{l=0}^{k-1} \frac{2^l}{(2^l + 1)^s} < 1 +  \sum_{l=0}^{k-1} \frac{2^l}{2^{sl}} 
-= 1 +  \sum_{l=0}^{k-1} \frac{1}{(2^{s-1})^l}  \]
-
-\[ = 1 + \frac{1 - \frac{1}{(2^{s-1})^k} } {1 - \frac{1}{2^{s-1}} } \]
-
-Now, $\frac{1}{2^{s-1}} < 1$, since $s > 1$.
-
-\[ \le \frac{1}{1 - \frac{1}{2^{s-1}}}  < \infty \]
-
-We have shown that $S_{2^k} \le \frac{1}{1 - \frac{1}{2^{s-1}}}$ for all $k$ (and independent of $k$) and hence the partial sums are bounded from above.  Since they are increasing, the series converges.
-
-Note that 
-\[ \sum_{n=1}^{\infty} \frac{1}{n^s} = \zeta(s) \]
-where $\zeta(s)$ is the Riemann Zeta function.
-
-\end{enumerate}  
-
-\end{proof}
-
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Continuous Functions}
@@ -674,3 +423,4 @@ i.e. as long as $x$ is within $\frac{1}{3}$ of 1, then distance between the func
 \chapter{Complex Numbers}
 
 \end{document}
+\message{ !name(RealAnalysis.tex) !offset(-426) }
