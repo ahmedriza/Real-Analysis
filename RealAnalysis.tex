@@ -177,7 +177,7 @@ Between any two real numbers there are both rational and irrational numbers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Absolute Value and Complex Numbers}
+\chapter{Absolute Value, Complex Numbers and Inequalities}
 
 \section{Absolute Value}
 
@@ -211,9 +211,67 @@ $|z - w|$ is the distance of $z$ to $w$.
 
 \section{Triangle Inequality}
 
+\begin{theorem}
 \[ |z - w| \le |z| + |w| \]
 Equivalent to 
 \[ |z + w| \le |z| + |w| \]
+\end{theorem}
+
+\begin{proof}
+\begin{eqnarray*}
+| z + w |^2 &=& (z + w)^2 = z^2 + 2zw + w^2 \\
+                  &\le& |z|^2 + 2|z||w| + |w|^2 = (|z| + |w|)^2
+\end{eqnarray*}
+\[ \Rightarrow |z + w| \le |z| + |w| \]
+\end{proof}
+
+\section{Reverse Triangle Inequality}
+
+\begin{theorem}
+\[ |z - w| \ge \left| |z| - |w| \right| \]
+\end{theorem}
+
+\begin{proof}
+
+\begin{eqnarray*}
+|z - w| + |w| &\ge& |z - w + w | = |z| \\
+|w - z| + |z|  &\ge&  |w - z + z | = |w| 
+\end{eqnarray*}
+This can be re-written as
+\begin{eqnarray*}
+|z - w| &\ge& |z - w + w | = |z| - |w| \\
+|w - z|   &\ge&  |w - z + z | = |w| - |z| 
+\end{eqnarray*}
+Now, $|z - w| = |w - z|$ and if $t \ge a$ and $t \ge -a$, then $t \ge |a|$.  Using this, we can conclude
+
+\[ |z - w| \ge \left| |z| - |w| \right| \]
+
+\end{proof}
+
+\section{Bernoulli Inequality}
+
+The following inequality is very important in analysis.
+
+\[ (1 + x)^n \ge 1 + nx \;\;\; \text{for} \;\;\; x > -1 \;\;\; \text{and} \;\;\; n \in \mathbb{N} \]
+
+\begin{proof}
+We use induction on $n$.  If $n = 0$
+\[ (1 + x)^0 \ge 1 + 0(x) \Rightarrow 1 \ge 1 \]
+is trivially true.  Assume it is true for $n = k$ for some $k$, i.e.
+\[ (1 + x)^k \ge 1 + kx \]
+
+\[ (1+x)(1 + x)^k \ge (1+x)(1 + kx) \]
+This is true, since $x > -1$ and $(1 + x) > 0$.
+
+\begin{eqnarray*}
+\Rightarrow (1+x)^{k+1}  &\ge&  1 + x + kx + kx^2 \\
+                                       &\ge& 1 + (k+1)x + kx^2 \\
+                                       &\ge& 1 + (k+1)x
+\end{eqnarray*}
+since $kx^2 > 0$.
+Therefore, by induction, the statement is true for all $n \in \mathbb{N}$.
+
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -271,6 +329,421 @@ Then $|S_n| = 1 > \frac{1}{2}$.  Hence it is not a null sequence.
 \end{proof}
 
 \section{Sequences Having a Limit (Converging Sequences)}
+
+\begin{definition}
+A sequence $S_n$ tends to a limit $L$, if for all $\epsilon > 0$, there eixts an $N$ (depending on $\epsilon$), such that for 
+all $n > N$, 
+\[ \left| S_n - L \right| < \epsilon \]
+\end{definition}
+
+Remarks:
+\begin{itemize}
+\item $S_n$ tneds to $L$ if and only if $S_n - L$ is a null sequence.
+\item $S_n$ is a null sequence if and only if $S_n$ tends to 0.
+\end{itemize}
+
+\subsection{Example}
+\[ S_n = \frac{n+1}{n} = 1 + \frac{1}{n} \]
+
+\[ S_n - 1 = \frac{1}{n} \]
+is a null sequence, so $S_n \rightarrow 1$.
+
+Or, using the definition:
+
+\[ \left|S_n - 1 \right| = \left| \frac{n+1}{n} - 1 \right| = \left| \frac{n+1-n}{n} \right| = \frac{1}{n} \]
+We want
+\[ \frac{1}{n} < \epsilon \Leftrightarrow n > \frac{1}{\epsilon} \]
+So, for any $\epsilon > 0$, let $N$ be any natural number $> \frac{1}{\epsilon}$.  Then if 
+\[ n > N \Rightarrow \frac{1}{n} < \frac{1}{N} < \epsilon \]
+So, 
+\[ n > N \Rightarrow \left|  S_n - 1 \right| < \epsilon \]
+Since $\epsilon > 0$ is arbitrary, this shows that
+\[ \lim_{n \to \infty} \frac{n+1}{n} = 1 \]
+
+
+\section{Properties of Limits}
+
+\begin{lemma}
+\label{lemma-lim-1}
+If $x_n$ and $y_n$ are null sequences, then so is $x_n + y_n$.
+\end{lemma}
+
+\begin{proof}
+Let $\epsilon > 0$ be arbitrary.  Since $x_n \rightarrow 0$, there exits an $N_1$ such that if $n > N_1$, then 
+$|x_n| < \frac{\epsilon}{2}$.
+
+Since $y_n \rightarrow 0$, there exists $N_2$ such that if $n > N_2$, then $|y_n| < \frac{\epsilon}{2}$. If 
+$n > \text{max}\{N_1, N_2\}$, then $\left| x_n + y_n \right| \le |x_n| + |y_n| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$.
+
+So, we have shown that there exists an $N$ such that for all $n > N$, 
+\[ \left| x_n + y_n \right| < \epsilon \Rightarrow x_n + y_n \rightarrow 0 \]
+\end{proof}
+
+%%%%%%
+
+\begin{lemma}
+\label{lemma-lim-2}
+If $x_n$ is a null sequence ($x_n \rightarrow 0$) and $y_n$ is a bounded sequence, then $x_n y_n$ is again a null sequence.
+\end{lemma}
+
+\begin{proof}
+$y_n$ is bounded, so there exists a number $k$ such that $|y_n| \le k$ for all n.
+
+\[ \left| x_n y_n \right| \le k|x_n| < \epsilon \Leftrightarrow |x_n| < \frac{\epsilon}{k} \]
+
+Now, $x_n \rightarrow 0$, so applying the definition with $\epsilon/k$ instead of $\epsilon$, there exists $N$ such that
+\[ n > N \Rightarrow |x_n| < \frac{\epsilon}{k} \]
+
+But then, if $n > N$, then
+\[ \left| x_n y_n \right| \le k|x_n| < k \frac{\epsilon}{k} = \epsilon \]
+
+So, for any $\epsilon > 0$, we can find an $N$ such that
+\[ \left| x_n y_n \right| < \epsilon \Rightarrow x_n y_n \rightarrow 0 \]
+
+\end{proof}
+
+%%%%%%
+
+\begin{lemma}
+\label{lemma-lim-3}
+Suppose a sequence $t_n$ has a limit, then $t_n$ is a bounded sequence, i.e., there exists a $k > 0$ such that 
+\[ |t_n| < k \;\;\; \forall n \]
+\end{lemma}
+
+\begin{proof}
+Suppose $t_n \rightarrow t$. Apply the definition with $\epsilon = 1$.
+
+\[ \exists \; N: n > N \Rightarrow \left| t_n - t \right| < 1 \]
+\[ |t_n| = \left| t_n - t + t \right| \le \left| t_n - t \right| + |t| < 1 + |t| \;\;\; \forall n > N \]
+
+If $n \le N$, then 
+\[ | t_n | \le \max\left( |t_1|, |t_2|, \ldots , |t_N| \right) \]
+
+So
+\[ |t_n| \le \max\left( |t_1|, |t_2|, \ldots , |t_N|, 1 + |t| \right) = k \;\;\; \forall n \]
+
+\end{proof}
+
+%%%%%%
+
+\begin{theorem}
+Suppose $s_n \rightarrow s$ and $t_n \rightarrow t$. Then
+\begin{enumerate}
+\item $ s_n + t_n \rightarrow s + t $
+\item $ s_n t_n \rightarrow s t $
+\item $ \frac{s_n}{t_n} \rightarrow \frac{s}{t} $ provided $t_n \ne 0$ and $t \ne 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item
+\[ s_n - s \rightarrow 0 \;\;\; t_n - t \rightarrow 0 \]
+Apply Lemma~\ref{lemma-lim-1} to $x_n = s_n - s$ and $y_n = t_n - t$.
+
+\[ (s_n - s) + (t_n - t) = (s_n + t_n) - (s + t) \rightarrow 0 \]
+Hence $s_n + t_n \rightarrow s + t$.
+
+\item 
+\[ s_n \rightarrow s \;\;\; t_n \rightarrow t \]
+We want to show that $s_n t_n \rightarrow s t$ or equivalently $s_n t_n - s t \rightarrow 0$.
+
+\[ s_n t_n - s t = (s_n - s)t_n + s(t_n - t) \]
+
+$t_n \rightarrow t$, so $t_n$ is a bounded sequence (Lemma~\ref{lemma-lim-3}).  $s_n \rightarrow s$, so $s_n - s$ is a null sequence.  From Lemma~\ref{lemma-lim-2}, $(s_n - s)t_n$ is a null sequence, i.e., $(s_n - s)t_n \rightarrow 0$.
+
+$t_n \rightarrow t$, so $t_n - t$ is a null sequence. The sequence which is constant and equal to $s$ is bounded.  By Lemma~\ref{lemma-lim-2}, $s(t_n - t) \rightarrow 0$.
+
+Since the sum of a null sequence is a null sequence, we get 
+\[ (s_n - s)t_n + s(t_n - t) \rightarrow 0 \]
+Hence
+\[ s_n t_n \rightarrow s t \]
+
+\item  We will prove this part in several stages.
+
+\begin{enumerate}
+\item Explain why 
+\[\left| \frac{1}{b_n} - \frac{1}{b} \right| = \frac{1}{|b_n b|} \left| b_n - b \right| \]
+We can write the left hand side as:
+\[ \left| \frac{1}{b_n} - \frac{1}{b} \right| = \left| \frac{b - b_n}{b_n b} \right|  = \frac{1}{|b_n b|} \left| b_n - b \right| \]
+since $|b - b_n| = |b_n - b|$.
+
+\item Show in two steps that the sequence, $\left\{ \frac{1}{|b_n b|} \right\}$ is bounded.
+\begin{enumerate}
+\item Show that the set $\{ b_n \}$ is bounded away from zero, i.e., there is some $\delta > 0$ such that 
+$|b_n| \ge \delta$ for all $n$.
+
+We know that
+\[ b_n \rightarrow b \Rightarrow \exists N: |b_n - b| < \epsilon \;\;\; \forall n > N \]
+Let $\epsilon = \frac{|b|}{2} > 0$.  It follows that
+\[ |b_n - b| < \frac{|b|}{2} \]
+Using the reverse triangle inequality
+\begin{eqnarray*}
+|b_n - b| &\ge& \left| |b_n| - |b| \right| \\
+              &\ge& \left| |b| - |b_n| \right| 
+\end{eqnarray*}
+Using this, we have
+\[ |b| - |b_n| < \frac{|b|}{2} \Rightarrow b_n > \frac{|b|}{2} \;\;\; \forall n > N \] 
+
+The remaining set $S = \{ |b_1|,  |b_2|,  \ldots, |b_N| \}$ is a finite set of positive numbers, and so has a positive minimum. 
+We can choose our $\delta = \min(S)$ and conclude that
+\[ |b_n| \ge \delta \;\;\; \forall n, \delta > 0 \]
+
+\item Show that 
+\[ \frac{1}{|b_n b|} < \frac{2}{(\delta |b|)} \;\;\; \forall n \]
+
+\[ |b_n| \ge \delta \Rightarrow |b_n b| \ge \delta |b| > \frac{\delta |b|}{2} \]
+since $|b| > |b|/2$.
+
+\[ \Rightarrow \frac{1}{|b_n b|} < \frac{2}{(\delta |b|)} \;\;\; \forall n \]
+
+\end{enumerate}
+
+\item We have shown in part (b) above that $\frac{1}{|b_n b|}$ is bounded.  Now prove that 
+\[ \frac{1}{b_n}\rightarrow \frac{1}{b} \]
+
+From part (a), we have
+\[\left| \frac{1}{b_n} - \frac{1}{b} \right| = \frac{1}{|b_n b|} \left| b_n - b \right| \]
+
+Since $\frac{1}{b_n b}$ is bounded above, say by $M$, that is, $\frac{1}{b_n b} < M$
+
+\[\Rightarrow \left| \frac{1}{b_n} -\frac{1}{b} \right| < M | b_n - b | \]
+Since $b_n \rightarrow b$, $b_n - b$ is a null sequence.  By the product rule, $M|b_n - b|$ is also a null sequence and hence,
+\[ \Rightarrow \left| \frac{1}{b_n} - \frac{1}{b} \right| \rightarrow 0 \Rightarrow  \frac{1}{b_n}\rightarrow \frac{1}{b} \]
+
+\end{enumerate}
+
+Finally, we can use the product rule again to show that $\frac{s_n}{t_n} \rightarrow \frac{s}{t} $.  By part (c) we have shown that 
+$\frac{1}{t_n} \rightarrow \frac{1}{t}$.  Now,
+\[ \frac{s_n}{t_n}  = s_n \left( \frac{1}{t_n} \right) \rightarrow \frac{s}{t} \] 
+
+\end{enumerate}
+\end{proof}
+
+\subsection{Example of an application of this theorem}
+
+\[ S_n = \frac{n^2 + 4n - 3}{2n^2 + 3n + 5} = \frac{1 + 4/n + 3/n^2}{2 + 3/n + 5/n^2} \]
+
+Now, $4/n \rightarrow 0$, $3/n^2 \rightarrow 0$, $3/n \rightarrow 0$, $5/n^2 \rightarrow 0$.  
+Therefore $S_n \rightarrow \frac{1}{2}$.
+
+\section{Divergence to Infinity}
+
+\begin{definition}
+$S_n \rightarrow \infty$ if, for any given real number $A > 0$, there exists an $N$ (depending on $A$) such that 
+if $n > N$, then $S_n > A$.
+\end{definition}
+
+\begin{definition}
+$S_n \rightarrow -\infty$ if, for any given real number $A > 0$, there exists an $N$ (depending on $A$) such that 
+if $n > N$, then $S_n < -A$.
+\end{definition}
+
+\subsection{Example}
+Take 
+\[ S_n = n^2 \]
+This sequence does not have a limit.  The general term $n^2$ becomes bigger than any given number if $n$ grows.
+We say that 
+\[ \lim_{n \to \infty} n^2 = \infty \;\;\; \text{or} \;\;\; n^2 \rightarrow \infty \]
+
+\[ S_n = n^2 > A \Leftrightarrow n > \sqrt{A} \]
+So, we can take for $N$ any natural number $> \sqrt{A}$.
+
+\subsection{Remark}
+\[ s_n + t_n \rightarrow s + t \]
+remains valid, if $s_n \rightarrow \infty$, provided $t_n$ has a finite limit or $t_n \rightarrow \infty$, i.e.
+
+\[ s_n \rightarrow \infty, \;\;\; t_n \rightarrow t \in \mathbb{R} \;\;\; \text{or} \;\;\; t_n \rightarrow \infty
+\Rightarrow s_n + t_n \rightarrow \infty \]
+However, this is not true if $t_n \rightarrow -\infty$, because $\infty + (-\infty)$ is not defined.
+
+\section{Example}
+\[ s_n = n, \;\;\; t_n = -n + a, \;\;\; a \in \mathbb{R} \]
+
+$s_n \rightarrow \infty$ and $t_n \rightarrow -\infty$, whatever the value of $a$.  But note that $s_n + t_n = a$!
+
+\section{Monotone Sequences}
+
+\begin{definition}
+$s_n$ is an increasing (decreasing) sequence if $s_{n+1} \ge s_n$ ($s_{n+1} \le s_n$).
+\end{definition}
+
+\begin{theorem}
+Monotone and bounded sequeces have a limit.
+
+Suppose that $s_n$ is an increasing sequence which is bounded from above, i.e. there exists a $K \in \mathbb{R}$
+such that $s_n \le K$ for all $n$.  Then $s_n$ tends to a limit.
+
+Similarly, if $s_n$ is a decreasing sequence which is bounded from below, i.e. $s_n \ge L$ for all $n$, for some
+$L \in \mathbb{R}$, then $s_n$ also tends to a limit.
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item Increasing Case:
+
+The set $s_n$ is bounded from above.  Put $s = \sup\{s_n\}$.  We claim that $s_n \rightarrow s$.
+
+Let $\epsilon > 0$.  On the one hand, $s$ is an upper bound, so
+\begin{equation}
+\label{mono-1}
+s_n \le s \;\;\; \forall n
+\end{equation}
+On the other hand, $s$ is the smallest upper bound, i.e. the least upper bound.  Hence $s - \epsilon$ is no longer
+an upper bound.  Therefore, there exists at least one $N$ such that 
+\[ s_N > s - \epsilon \]
+but the sequence is increasing, so
+\[ n > N \Rightarrow s_n > S_N > s - \epsilon \]
+So, we have shown that 
+\begin{equation}
+\label{mono-2}
+s_n > s - \epsilon \;\;\; \forall n > N
+\end{equation}
+
+By using Equations~\ref{mono-1} and \ref{mono-2}:
+\begin{eqnarray*}
+s - \epsilon &<& s_n \le s  \\
+\epsilon - s &>& -s_n \ge -s  \\
+\epsilon &>& s - s_n \ge 0 \Rightarrow 0 \le s - s_n < \epsilon \\
+|s - s_n| &<& \epsilon \;\;\; \forall n > N
+\end{eqnarray*}
+Hence, 
+\[ s_n \rightarrow s \]
+
+\item Decreasing Case
+
+If $s_n$ is decreasing and bounded from below, 
+\[ s_n \ge A \;\;\; \forall n \]
+then $-s_n$ is increasing and bounded from above.  
+\[ -s_n \le -A \;\;\; \forall n \;\;\; \Rightarrow -s_n \rightarrow -s \Rightarrow s_n \rightarrow s \]
+
+\end{enumerate}
+\end{proof}
+
+\subsection{Application: Sequenes Defined by a Recurrence Relation}
+
+\[ f : \mathbb{R} \longrightarrow \mathbb{R} \]
+
+\[ x_{n+1} = f(x_n) \]
+$x_1$ is given (this is a one term recurrence relation).  
+\begin{enumerate}
+\item If $f$ is increasing, then the sequence $x_n$ is increasing
+\item Next, if we can show that $x_n$ is bounded, then $\lim_{n \to \infty} x_n$ exists.
+\end{enumerate}
+
+How do we find $x = \lim_{n \to \infty} f(x_n)$?  Let $n \rightarrow \infty$ in $x_{n+1} = f(x_n)$.   Note that in order for this technique 
+to apply, we need something like the following to apply:
+
+\[\lim_{n \to \infty} f(x_n) = f(\lim_{n \to \infty} x_n) \]
+This works in general if $f$ is continuous. Now:
+
+\[ x_{n+1} \rightarrow x \]
+\[ f(x_n) \rightarrow f(x) \]
+
+\subsection{Example}
+Suppose that $x_1 = 1$, and for $n \ge 1$, 
+\[ x_{n+1} = \sqrt{1 + x_n} \]
+Thus, $x_n$ begins with: $1, \sqrt{2}, \sqrt{1 + \sqrt{2}}, \sqrt{1 + \sqrt{1 + \sqrt{2}}}$, etc.  It is certainly not immediately clear
+what the limit will be if it exists!  However, the first few terms do suggest that $x_n$ is increasing.  We prove this in general
+using induction:  
+\[ x_1 = 1 < \sqrt{2} = x_2 \]
+Now, if $x_{n-1} < x_n$, then 
+\[ x_n = \sqrt{1 + x_{n-1}} < \sqrt{1 + x_n} = x_{n+1} \]
+Hence, $x_n$ is increasing, by induction.  Also, $x_1 < 2$, and if $x_n < 2$ then 
+\[ x_{n+1} = \sqrt{1 + x_n} < \sqrt{1 + 2} = \sqrt{3} < 2 \]
+So $x_n$ is bounded above by 2.
+
+Thus, we have shown that $x_n$ is increasing and bounded above, hence $x = \lim_{n \to \infty} x_n$ exists in $\mathbb{R}$.
+To find its value we first need to find 
+\[ \lim_{n \to \infty} \sqrt{1 + x_n} \]
+In fact, this limit is simply $\sqrt{1 + x}$.  To prove this, write
+
+\[ \left| \sqrt{1 + x_n} - \sqrt{1 + x} \right|= \frac{\left| 1 + x_n - (1+x) \right|}{\sqrt{1+x_n} + \sqrt{1 + x}} < |x_n - x| \]
+since $x_n$ and $x$ are positive, so the denominator is greater than 1.  But 
+\[ x_n \rightarrow x \Rightarrow |x_n - x| < \epsilon, \;\;\; \epsilon > 0 \]
+\[ \Rightarrow \left| \sqrt{1 + x_n} - \sqrt{1 + x} \right| < \epsilon \]
+Hence 
+$\sqrt{1 + x_n}  \rightarrow \sqrt{1 + x}$ as claimed.
+
+Now, we have $x = \lim_{n \to \infty} x_n = \lim_{n \to \infty} x_{n+1} = \sqrt{1 + x}$. 
+\[ x^2 - x - 1 = 0 \]
+\[ \Rightarrow x = \frac{1 + \sqrt{5}}{2} \]
+since $x > 0$.  This number is known as the golden section, which is also the limit of ratios of successive Fibonacci numbers.
+
+\subsection{Example}
+Consider the sequence given by 
+\[ x_0 = a + 1, \;\;\; x_{n+1} = x_n \left( 1 + \frac{a - x_n^k}{k x_n^k} \right) \]
+for a fixed $a > 0$ and fixed $k \in \mathbb{N}$. 
+
+Let's try $a = 1$, $k = 1$.  
+\[ \Rightarrow x_0 = 2 \Rightarrow x_1 = 2 \left( 1 + \frac{1-2}{2} \right) = 1 \]
+So, we claim that $x_{n+1} < x_n$, $x_n > 0$ and $x_n^k > a$ (in order for the sequence to decrease).  Lets prove all three claims
+by using induction. If $n = 0$:
+
+\[ x_0 = a + 1 > 0 \]
+
+\[ x_0^k = (a+1)^k > a \]  
+
+\begin{eqnarray*}
+ x_1 &=& (a+1) \left( 1 + \frac{a - (a+1)^k}{k(a+1)^k} \right) \\
+       &<& (a+1) < x_0
+\end{eqnarray*}
+since
+\[ (a + 1)^k > a \Rightarrow a - (a+1)^k <0 \Rightarrow \frac{a - (a+1)^k}{k(a+1)^k} < 0 \]
+So all three claims are true for $n = 0$.  For the inductive step, assume they hold for some fixed $n$.
+
+Now, since $x_n > 0$ and $a < (a+1)^k$ 
+\[ \Rightarrow x_{n+1} < x_n \]
+
+What about $x_{n+1}$?  In order for this to remain $> 0$, we need
+\[ 1 + \frac{a - x_n^k}{k x_n^k} > 0 \]
+
+\[ 1 + \frac{a - x_n^k}{k x_n^k} = \frac{kx_n^k + a - x_n^k}{kx_n^k} = \frac{x_n^k(k-1) + a}{kx_n^k} > 0\]
+since $k \ge 1$, $x_n > 0$ and $a > 0$.  Hence
+\[ x_{n+1} > 0 \]
+
+Finally, we need to verify that $x_{n+1}^k > a$.  We will use the Bernoulli inequality with 
+$x = \frac{a - x_n^k}{kx_n^k}$ (which is greater than -1 because $kx_n^k + a - x_n^k > 0)$.
+
+\[ x_{n+1}^k = x_n^k \left( 1 + \frac{a - x_n^k}{kx_n^k} \right) ^k > x_n^k \left( 1 + k\frac{a - x_n^k}{kx_n^k} \right) 
+> x_n^k \left( \frac{x_n^k + a - x_n^k}{x_n^k} \right)  = a \]
+
+Hence, by induction, all three claims are true for all $n$.  So $x_n$ is decreasing and bounded below by $0$. {\bf It 
+therefore converges to $\alpha = \inf \{ x_n \}$, which is non-negative}.  The recursion formula can be written as
+\begin{eqnarray*}
+x_{n+1}                &=& x_n \left( \frac{kx_n^k + a - x_n^k}{kx_n^k} \right) \\
+kx_n^k x_{n+1}    &=& x_n \left( kx_n^k + a - x_n^k \right) \\
+kx_{n+1}x_n^{k-1}  &=& (k-1)x_n^k + a 
+\end{eqnarray*}
+and by the algebra of limits, we can let $n \rightarrow \infty$ on boths sides to obtain
+
+\[ k \alpha \alpha^{k-1} = (k-1)\alpha^k + a \]
+
+\[ k\alpha^k = (k-1)\alpha^k + a = k\alpha^k - \alpha^k + a \]
+
+\[ \Rightarrow \alpha^k = a \]
+In other words, $\alpha = a^{1/k}$.    We have shown, therefore, that every positive real nubmer has a positive
+$k^{th}$ root for every fixed $k \in \mathbb{N}$.  This root is {\em unique}, since if we have two positive numbers
+$\alpha, \beta$ with $\alpha < \beta$, then $0 < \alpha^k < \beta^k$, so $\alpha^k$ and $\beta^k$ cannot both equal $a$.
+
+In fact, this is just a version of {\em Newton's method} for finding approximate roots of equations.  In particular, we can
+approximate roots of 
+\[ f(x) = x^k - a \]
+by taking an overestimate $x_n$ of this root, and choosing
+\[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \]
+as the next estimate (where $f'$ denotes the derivative).  In the case $f(x) = x^k - a$ we have $f'(x) = kx^{k-1}$, and we 
+have just verified that this procedure does yield a convergent sequence whose limit is the positive root of the equation
+\[ x^k = a \]
+
+\subsection{Example}
+The sequence $a_n$ is defined by 
+\[ a_1 = 1 \;\;\; a_n = \frac{3a_{n-1} + 4}{2a_{n-1} + 3} \]
+Show that the sequence has a limit and find the value of the limit.
+
+\subsection{Example}
+The sequence $a_n$ is defined by 
+\[ a_1 = 2 \;\;\; a_n = \frac{1}{a_{n-1} + 2} \]
+Show that the sequence has a limit and find the value of the limit.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
