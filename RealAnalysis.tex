@@ -569,6 +569,7 @@ $s_n$ is an increasing (decreasing) sequence if $s_{n+1} \ge s_n$ ($s_{n+1} \le 
 \end{definition}
 
 \begin{theorem}
+\label{monotone}
 Monotone and bounded sequeces have a limit.
 
 Suppose that $s_n$ is an increasing sequence which is bounded from above, i.e. there exists a $K \in \mathbb{R}$
@@ -740,10 +741,136 @@ The sequence $a_n$ is defined by
 \[ a_1 = 1 \;\;\; a_n = \frac{3a_{n-1} + 4}{2a_{n-1} + 3} \]
 Show that the sequence has a limit and find the value of the limit.
 
+\begin{proof}
+We need to prove that the sequence is monotonic and bounded.  The first few terms are
+\[ a_1 = 1 \;\;\; a_2 = \frac{7}{5} \;\;\; a_3 = \frac{41}{29} \]
+We claim that the sequence is increasing.  By looking for a solution of
+\[ x = \frac{3x + 4}{2x+3} \Rightarrow 2x^2 + 3x - 3x -4 = 0 \Rightarrow x^2 = 2 \]
+we claim that the sequence is bounded above by $\sqrt{2}$.  We need to prove both.
+
+We will use induction to prove that the sequence is bounded above $\sqrt{2}$.  For $n = 1$,
+\[ a_1 = 1 < \sqrt{2} \]
+Assume that $a_k$ is valid for any $k \in \mathbb{N}$.  Then
+\begin{eqnarray*}
+a_{k+1} = \frac{3a_k + 4}{2a_k + 3} &<& \frac{3\sqrt{2} + 4}{2\sqrt{2}+3} = \frac{\sqrt{2}(3 + 4/\sqrt{2})}{\sqrt{2}(2 + 3/\sqrt{2})} \\
+&=& \frac{3 + 4/\sqrt{2}}{2 + 3/\sqrt{2}} = \frac{3 + 2\sqrt{2}}{2 + 3/\sqrt{2}} = \frac{3 + 2\sqrt{2}}{ (2\sqrt{2} + 3)/\sqrt{2}} \\
+&=& \sqrt{2} 
+\end{eqnarray*}
+
+Next, we will prove our claim that $a_n$ is increasing by showing that $a_{n+1} - a_n > 0$.
+\begin{eqnarray*}
+a_{n+1} - a_n = \frac{3a_n + 4}{2a_n + 3} - a_n &=& \frac{3a_n + 4 - a_n(2a_n + 3)}{2a_n + 3} \\
+&=& \frac{4 - 2a_n^2}{2a_n + 3} > \frac{4 - 4}{2a_n + 3} = 0 
+\end{eqnarray*}
+since $a_n < \sqrt{2}$.  We have verified that $a_n$ is increasing and bounded above by $\sqrt{2}$.  Therefore, by 
+Thorem~\ref{monotone} (page \pageref{monotone}), it has a limit $l$.  By the algebra of limits
+\[ \lim_{n \to \infty} \frac{3a_n + 4}{2a_n + 3} = \frac{3l + 4}{2l + 3} \]
+Now, $\lim_{n \to \infty} a_{n+1} = l$, hence using the iteration formula
+\[ \frac{3l + 4}{2l + 3} = l \Rightarrow l^2 = 2 \Rightarrow l = \pm\sqrt{2} \]
+All the terms of the sequence are positive, so $l$ cannot be negative.  Therefore $l = \sqrt{2}$.
+\end{proof}
+
 \subsection{Example}
 The sequence $a_n$ is defined by 
 \[ a_1 = 2 \;\;\; a_n = \frac{1}{a_{n-1} + 2} \]
 Show that the sequence has a limit and find the value of the limit.
+
+\section{Subsequences}
+
+\begin{definition}
+Let $a_n$ be a sequence, regarded as a function 
+\[ a: \mathbb{N} \rightarrow \mathbb{R} \]
+A {\em subsequence} $a_{n_k}$ of $a_n$ is a composite function 
+\[ a \circ n : \mathbb{N} \rightarrow \mathbb{R} \]
+where $n: \mathbb{N} \rightarrow \mathbb{N}$ is any {\em strictly increasing} function.
+\end{definition}
+
+Some observations:
+\begin{enumerate}
+\item {\em A useful inequality}: The definition implies a simple inequality that is useful in proofs.
+\[ n_k \ge k \;\;\; \forall k \]
+The $k^{th}$ term of a subsequence can't appear before the $k^{th}$ term of the parent sequence.
+
+\item {\em Another subsequence}: The subsequence indices $n_1, n_2, n_3, n_4, \ldots$ for $a_{n_k}$ form still another subsequence, a {\em strictly increasing} subsequence of $\{1, 2, 3, \ldots \}$.
+\end{enumerate}
+
+\subsection{Properties of Subsequences}
+Every infinite sequence $x_n$ has countless subsequences.  What can be said about such an enormous set?  The answer is,
+``quite a lot'': subsequences often ``inherit'' their parents' basic properties.
+
+\begin{theorem} 
+Let $x_n$ be a sequence and $L$ a number.
+\begin{enumerate}
+
+\item If $x_n$ converges to $L$, then every subsequence $x_{n_k}$ converges to $L$ too.
+
+\item If $x_n$ diverges to $\pm \infty$, then every subsequence $x_{n_k}$ diverges to $\pm \infty$.
+
+\item If $x_n$ has subsequences converging to different limits, then $x_n$ diverges.
+
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Key to both proofs is the fact, mentioned above that, for any subsequence, $n_k > k$ for all $k$.  
+\begin{enumerate}
+\item
+Let $\epsilon > 0$  be given.  By hypothesis, there exists $N$ that works for $x_n$ in the sense that $|x_n - L| < \epsilon$
+whenever $ n > N $. The key fact above implies that {\em the same} $N$ works for $x_{n_k}$; if $k > N$ then
+$n_k \ge k > N$, and so $|x_{n_k} - L| < \epsilon$, as desired.
+
+\item Similar to the above proof.
+
+\item Follows immediately from 1.
+
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+\label{prop-monotone-subsequence}
+Every sequence has a monotone subsequence.
+\end{proposition}
+
+This proposition is easy to state, but a little bit tricky to prove. Before, we can prove this, we need a couple of lemmas.
+
+\begin{lemma}
+\label{lemma-monotone-subsequence-1}
+Every unbounded sequence $x_n$ has a monotone subsequence that diverges to $\pm \infty$.
+\end{lemma}
+\begin{proof} (sketch)
+For a sequence $\{x_n\}$ unbounded above, we'll find an {\em increasing} sequence $\{x_{n_k}\}$ with $x_{n_k} > k$
+for all $k$. Since $\{x_n\}$ is unbounded above, we can choose $n_1$ so $x_{n_1} > 1$.  Now the ``upper tail''
+\[ x_{{n_1} + 1},  x_{{n_1} + 2}, x_{{n_1} + 3}, x_{{n_1} + 4}, \ldots \]
+is also unbounded above, and so we can choose $n_2$ with $n_2 > n_1$ and $x_{n_2} > \max\{2, x_{n_1} \}$.
+Then we choose $n_3$ with $n_3 > n_2$ and $x_{n_3} > \max\{3, x_{n_2} \}$.  Continuing this process produces the desired subsequence.  A similar construction produces a strictly {\em decreasing} subsequence if $\{x_n\}$ is unbounded {\em below}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-monotone-subsequence-2}
+Let $\{x_n\}$ be a boundd sequence, with $\inf \alpha$ and $\sup \beta$. If $\alpha \notin \{x_n\}$, then there is a decreasing subsequence $\{x_{n_k}\}$ with $x_{n_k} \rightarrow \alpha$.  if $\beta \notin \{x_n\}$, then there is an increasing subsequence
+$\{x_{n_k}\}$ with $x_{n_k} \rightarrow \beta$.
+\end{lemma}
+
+\begin{proof} (sketch)
+To save a little labour, we'll use Lemma~\ref{lemma-monotone-subsequence-1} and some fancy algebra.  In the case 
+$\beta \notin \{x_n\}$, we define a new sequence $\{y_n\}$ by the rule
+\[ y_n = \frac{1}{\beta - x_n} \]
+Now, $\{ y_n \}$ is unbounded above, and so Lemma~\ref{lemma-monotone-subsequence-1} guarantees that there is an {\em increasing} subsequence $\{ y_{n_k} \}$ with $y_{n_k} \rightarrow \infty$.  But this implies that
+\[ \frac{1}{y_{n_k}} = \beta - x_{n_k} \rightarrow 0 \]
+This implies in turn that $\{ x_{n_k} \}$ is increasing, with limit $\beta$. A similar argument applies if 
+$\alpha \notin \{ x_n \}$.
+\end{proof}
+
+At last, we can prove Proposition~\ref{prop-monotone-subsequence}.  Watch for the completeness axiom to pop up, and for 
+Lemma~\ref{lemma-monotone-subsequence-2} to provide the key technical insight.
+
+Let $\{ x_n \}$ be our sequence.  If $\{ x_n \}$ is unbounded, we're done, by Lemma~\ref{lemma-monotone-subsequence-1}. So
+we will assume that
+\begin{enumerate}
+\item $\{ x_n \}$ is bounded
+\item $\{ x_n \}$ has no increasing subsequence
+\end{enumerate}
+and use assumptions to construct a {\em decreasing} subsequence.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -935,6 +1062,84 @@ where $\zeta(s)$ is the Riemann Zeta function.
 
 \end{proof}
 
+\section{Algebra of Series}
+\begin{theorem}
+\label{series-algebra}
+Suppose that $\sum a_n$ and $\sum b_n$ are convergent series with sums $S$ and $T$ respectively.  Then
+\begin{itemize}
+\item The series $\sum (a_n + b_n)$ converges with sum $S + T$
+\item The series $\sum ka_n$ converges with sum $kS$ where $k$ is a constant
+\end{itemize}
+\end{theorem}
+
+\section{Comparison Test}
+\begin{theorem}
+\label{comparison}
+Suppose that $\sum a_i$ is a convergent series of non-negative terms, with sum $S$, and that $\sum b_i$ is a series
+having the property that $0 \le b_i \le a_i$ for all $i \in \mathbb{N}$. Then $\sum b_i$ converges, with sum $T$, 
+where $T \le S$.
+\end{theorem}
+
+\begin{proof}
+Let $s_n$ denote the sequence of partial sums for the series $\sum a_i$ and let $t_n$ denote the sequence of partial 
+sums for the series $\sum b_i$.  Because the terms of both series are non-negative, both sequences of partial sums
+are increasing.  Because  $\sum a_i$ converges, $\lim_{n \to \infty} s_n = S$ and moreover $s_n < S$ for all $n$. 
+SInce $b_i \le a_i$ for all $i$ it follows that $t_n \le s_n \le S$ for all $n$.  So $t_n$ is a sequence which is increasing
+and bounded above (by $S$).  It therefore converges to a limit $T$ which cannot be greater than $S$.
+\end{proof}
+
+The {\bf converse} of Theorem~\ref{series-algebra} can normally be used to prove divergence.  If $0 \le b_i \le a_i$ and 
+$\sum b_i$ diverges, then $t_n \rightarrow \infty$.  Therefore, the sequence $s_n \rightarrow \infty$ and so
+$\sum a_i$ diverges.  
+
+\section{Exercises}
+Discuss the convergence of the series whose $n^{th}$ terms are given by the following formulae, using the comparison test.
+
+\begin{enumerate}
+\item 
+\[ a_n = \frac{n^3 + 4n+ 3}{\sqrt{n^{10} + n^7}} \]
+To estimate the behaviour of this, we look at its behaviour as $n \rightarrow \infty$, the numerator is dominated by $n^3$ and the denominator is dominated by $\sqrt{n^{10}} = \sqrt{5}$, so effectively we have something that behaves like $n^3/n^5 = 1/n^2$.   We sketch the behaviour of
+the function and $1/n^2$ below:
+
+\includegraphics{series-comp-1.pdf}
+
+Clearly $a_n$ does behave like $1/n^2$ as $n \rightarrow \infty$.  Let's prove this.
+\begin{proof}
+\[ n^3 + 4n + 3 < n^3 + 4n^3 + 3n^3 \]
+
+\[ \sqrt{n^{10} + n^7} > \sqrt{n^{10}} \]
+
+\[ \Rightarrow \frac{n^3 + 4n+3}{\sqrt{n^{10} + n^7}} < \frac{n^3 + 4n + 3}{\sqrt{n^{10}}} 
+< \frac{n^3 + 4n^3 + 3n^3}{\sqrt{n^{10}}} = \frac{8n^3}{n^5} = \frac{8}{n^2} \]
+Now, $\sum \frac{1}{n^2}$ converges and by Theorem~\ref{series-algebra}, $\sum \frac{8}{n^2}$ also converges.
+Hence, by comparison, $\sum a_n$ converges.
+\end{proof}
+
+\item 
+\[ b_n = \frac{n^3 + 4n + 3}{\sqrt{n^8 + 3n^7}} \]
+As $n \rightarrow \infty$, the numerator is dominated by $n^3$ and the denominator is dominated by $\sqrt{n^8} = n^4$.  So
+the sequence $b_n$ is behaving like $1/n$ suggesting divergence.
+
+By the converse of Thorem~\ref{comparison}, we need to find a sequence smaller than $b_n$ behaving like $1/n$ indicating
+divergence.
+
+\[ n^3 < n^3 + 4n + 3 \]
+
+\[ \sqrt{n^8 + 3n^8} > \sqrt{n^8 + 3n^7} \]
+
+\[  \Rightarrow \frac{n^3 + 4n + 3}{\sqrt{n^8 + 3n^7}}  > \frac{n^3}{\sqrt{n^8 + 3n^7}} 
+> \frac{n^3}{\sqrt{n^8 + 3n^8}} = \frac{n^3}{\sqrt{4n^8}} = \frac{1}{2n} \]
+By Theorem~\ref{series-algebra}, $\sum \frac{1}{2n}$ diverges and hence $\sum b_n$ diverges by comparison.
+
+\item
+\[ c_n = \frac{n^2 - 2n}{\sqrt{n^6 + 3n^2 + 5}} \]
+
+
+
+\end{enumerate}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Continuous Functions}
@@ -997,6 +1202,33 @@ The set D is called the domain of the function.
 \[ \left\{ (x, f(x)) : x \in D \right\}  =  \left\{ (x, y) \in \mathbb{R}^2 :  x \in D, y = f(x) \right\} \]
 
 We cannot really draw the graphs of (5) and (6), since rational points are dense.
+
+\section{Behaviour of $f(x)$ for large values of $x$}
+
+Take the function
+\[ y = \frac{1}{x-2} \]
+As $x$ approaches 2, taking values greater than 2, $y \rightarrow \infty$.  (Also, as $x$ approaches 2, through values less
+than 2, $y \rightarrow \-infty$).  We can denote the approach of $x$ to a number $c$ through values greater than $c$ by
+writing $x \rightarrow c^+$ (and through values less than $c$ by $x \rightarrow c^-$).
+
+\includegraphics{func-1.pdf}
+
+\begin{definition}
+$f(x) \rightarrow \infty$ as $x \rightarrow c^+$ if, given $A$, there is $\delta$ such that 
+\[ f(x) > A \;\;\; \forall x \in c < x < c + \delta \]
+\end{definition}
+
+\begin{definition}
+$f(x) \rightarrow \infty$ as $x \rightarrow \infty$ if, given $A$, there exists $X$ such that
+\[ f(x) > A \;\;\; \forall x > X \]
+\end{definition}
+
+\begin{definition}
+$f(x) \rightarrow l$ as $x \rightarrow -\infty$ if, given $\epsilon$, there is $X$ such that 
+\[ | f(x) - l | < \epsilon \;\;\; \forall x < -X \]
+\end{definition}
+
+\section{Continuous Functions}
 
 \begin{definition}
 
